@@ -22,6 +22,10 @@ cd sunroc_system
 # Make a .env file for the docker containers.
 cp .env.sample .env
 
+# Build docker images anew (this is especially important for
+# sunroc_transactions because of the Rewards_Data_View.)
+docker-compose build
+
 # Make sure all the environment variables are correct, and then, start the
 # containers, starting with the mssql container:
 docker-compose up -d mssql
