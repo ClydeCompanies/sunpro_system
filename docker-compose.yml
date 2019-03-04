@@ -1,0 +1,98 @@
+---
+version: '3.1'
+
+volumes:
+  transactions-data:
+  rewards-data:
+
+services:
+  rewards:
+    build:
+      context: ../sunroc_rewards
+    volumes:
+      - ../sunroc_rewards:/app
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
+    ports:
+      - 4000:4000
+      - 4042:4042
+    command:
+      - mix
+      - phx.server
+    depends_on:
+      - rewardsdb
+
+  invoice_processor:
+    build:
+      context: ../sunroc_invoice_processor
+    volumes:
+      - ../sunroc_invoice_processor:/app
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
+    ports:
+      - 4001:4000
+    command:
+      - mix
+      - phx.server
+    depends_on:
+      - transactionsdb
+      - rewardsdb
+
+  transactions:
+    build:
+      context: ../sunroc_transactions
+    volumes:
+      - ../sunroc_transactions:/app
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
+    command:
+      - mix
+      - run
+      - --no-halt
+    depends_on:
+      - transactionsdb
+      - mssql
+
+  transactionsdb:
+    image: postgres:10.6
+    restart: always
+    environment:
+      POSTGRES_DB: sunroc_transactions_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - transactions-data:/var/lib/postgresql/data
+    ports:
+      - 4032:5432
+
+  rewardsdb:
+    image: postgres:10.6
+    restart: always
+    environment:
+      POSTGRES_DB: sunroc_rewards_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - rewards-data:/var/lib/postgresql/data
+    ports:
+      - 4033:5432
+
+  mssql:
+    build:
+      context: ../sunroc_transactions/docker/mssql/
+    restart: always
+    environment:
+      ACCEPT_EULA: 'Y'
+      SA_PASSWORD: Sunroc7Rewards7Development
+      MSSQL_PID: Developer
+    ports:
+      - 1433:1433
+    volumes:
+      - ../sunroc_transactions/tmp:/usr/src/tmp
+
