@@ -95,4 +95,4 @@ services:
       - 1433:1433
     volumes:
       - ../sunroc_transactions/tmp:/usr/src/tmp
-
+      - ../sunroc_transactions/docker/mssql/Rewards_Data_View.tsv:/app/docker/mssql/Rewards_Data_View.tsv
