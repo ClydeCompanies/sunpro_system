@@ -22,6 +22,11 @@ cd sunroc_system
 # Make a .env file for the docker containers.
 cp .env.sample .env
 
+# Get dependencies.
+docker-compose run --rm invoice_processor mix deps.get
+docker-compose run --rm rewards mix deps.get
+docker-compose run --rm transactions mix deps.get
+
 # Build docker images anew (this is especially important for
 # sunroc_transactions because of the Rewards_Data_View.)
 docker-compose build
