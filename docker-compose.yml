@@ -13,28 +13,9 @@ services:
       - ../sunroc_rewards:/app
     env_file:
       - .env
-    stdin_open: true
-    tty: true
     ports:
       - 4000:4000
       - 4042:4042
-    command:
-      - mix
-      - phx.server
-    depends_on:
-      - rewardsdb
-
-  invoice_processor:
-    build:
-      context: ../sunroc_invoice_processor
-    volumes:
-      - ../sunroc_invoice_processor:/app
-    env_file:
-      - .env
-    stdin_open: true
-    tty: true
-    ports:
-      - 4001:4000
     command:
       - mix
       - phx.server
@@ -49,8 +30,6 @@ services:
       - ../sunroc_transactions:/app
     env_file:
       - .env
-    stdin_open: true
-    tty: true
     command:
       - mix
       - run
