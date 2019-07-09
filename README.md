@@ -7,7 +7,6 @@ This is a docker-compose wrapper for all of the various apps used by Sunroc Rewa
 To get all the sites up and running, you'll need to make sure that all of the application folders are siblings to this folder, like this:
 
 ```
-drwxr-xr-x  21 dan  staff    672 Feb 28 13:08 sunroc_invoice_processor
 drwxr-xr-x  19 dan  staff    608 Feb  1 01:36 sunroc_rewards
 drwxr-xr-x   8 dan  staff    256 Mar  4 15:29 sunroc_system
 drwxr-xr-x  23 dan  staff    736 Feb 28 15:47 sunroc_transactions
@@ -23,7 +22,6 @@ cd sunroc_system
 cp .env.sample .env
 
 # Get dependencies.
-docker-compose run --rm invoice_processor mix deps.get
 docker-compose run --rm rewards mix deps.get
 docker-compose run --rm transactions mix deps.get
 
