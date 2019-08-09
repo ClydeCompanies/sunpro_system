@@ -15,6 +15,7 @@ services:
       - .env
     ports:
       - 4000:4000
+      - 4443:4443
       - 4042:4042
     command:
       - mix
