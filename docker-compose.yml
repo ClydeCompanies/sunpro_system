@@ -76,3 +76,4 @@ services:
     volumes:
       - ../sunroc_transactions/tmp:/usr/src/tmp
       - ../sunroc_transactions/docker/mssql/Rewards_Data_View.tsv:/app/docker/mssql/Rewards_Data_View.tsv
+      - ../sunroc_transactions/docker/mssql/Customer_Dimension.tsv:/app/docker/mssql/Customer_Dimension.tsv
