@@ -1,22 +1,22 @@
-# Sunroc System
+# Sunpro System
 
-This is a docker-compose wrapper for all of the various apps used by Sunroc Rewards.
+This is a docker-compose wrapper for all of the various apps used by Sunpro Rewards.
 
 ## Setup
 
 To get all the sites up and running, you'll need to make sure that all of the application folders are siblings to this folder, like this:
 
 ```
-drwxr-xr-x  19 dan  staff    608 Feb  1 01:36 sunroc_rewards
-drwxr-xr-x   8 dan  staff    256 Mar  4 15:29 sunroc_system
-drwxr-xr-x  23 dan  staff    736 Feb 28 15:47 sunroc_transactions
+drwxr-xr-x  19 dan  staff    608 Feb  1 01:36 sunpro_rewards
+drwxr-xr-x   8 dan  staff    256 Mar  4 15:29 sunpro_system
+drwxr-xr-x  23 dan  staff    736 Feb 28 15:47 sunpro_transactions
 ```
 
 Then, run the following:
 
 ```bash
 # Change directories.
-cd sunroc_system
+cd sunpro_system
 
 # Make a .env file for the docker containers.
 cp .env.sample .env
@@ -26,7 +26,7 @@ docker-compose run --rm rewards mix deps.get
 docker-compose run --rm transactions mix deps.get
 
 # Build docker images anew (this is especially important for
-# sunroc_transactions because of the Rewards_Data_View.)
+# sunpro_transactions because of the Rewards_Data_View.)
 docker-compose build
 
 # Make sure all the environment variables are correct, and then, start the
